@@ -32,3 +32,11 @@ jobs:
           DNSHE_API_KEY: ${{ secrets.DNSHE_API_KEY }}
           DNSHE_API_SECRET: ${{ secrets.DNSHE_API_SECRET }}
         run: python renew.py
+
+      # 最后一步：生成摘要（会出现在通知邮件中）
+      - name: 📝 生成执行摘要
+        if: always()
+        run: |
+          echo "✅ DNSHE 自动续期任务已完成" >> $GITHUB_STEP_SUMMARY
+          echo "🕒 时间: $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "ℹ️ 详情请查看 Actions 日志。" >> $GITHUB_STEP_SUMMARY
