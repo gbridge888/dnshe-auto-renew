@@ -1,0 +1,34 @@
+name: 🌐 DNSHE 自动续期
+
+on:
+  # 定时触发：每月最后一天 UTC 19:00 = 北京时间次月1日 03:00
+  schedule:
+    - cron: '0 19 31 * *'
+  
+  # 允许手动触发（用于测试）
+  workflow_dispatch:
+
+jobs:
+  renew:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: 📥 检出仓库代码
+        uses: actions/checkout@v4
+
+      # 2. 设置 Python 环境
+      - name: 🐍 设置 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. 安装依赖
+      - name: 📦 安装 requests
+        run: pip install requests
+
+      # 4. 运行续期脚本
+      - name: 🚀 执行 DNSHE 续期
+        env:
+          DNSHE_API_KEY: ${{ secrets.DNSHE_API_KEY }}
+          DNSHE_API_SECRET: ${{ secrets.DNSHE_API_SECRET }}
+        run: python renew.py
