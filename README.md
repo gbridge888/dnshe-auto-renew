@@ -45,7 +45,30 @@
 2. 在左侧选择 **"DNSHE Domain Auto Renew"** 工作流。
 3. 点击 **Run workflow** 手动触发一次，验证配置是否正确。
 
----
+### 第五步：启用邮件通知
+1.全局邮件通知设置（控制所有通知的接收方式）
+点击右上角头像 → 选择“Settings”（设置）。
+在左侧菜单中点击“Notifications”（通知）。
+在“Email”（邮件）部分，确保你已添加并验证了接收通知的邮箱地址。
+选择“Receive notifications by email”（通过邮件接收通知）的频率：
+All activity：接收所有活动通知（不推荐，邮件量大）。
+Only for threads that I’m watching or participating in：仅接收你关注或参与的讨论通知（推荐）。
+Never：从不接收邮件通知。
+
+2.按仓库设置邮件通知（精细化控制）
+进入目标仓库页面。
+点击页面右上角的“Watch”（关注）按钮。
+在下拉菜单中选择：
+Watching：接收该仓库所有活动的邮件通知。
+Custom：自定义接收哪些事件的通知（如 Issues、Pull Requests、Releases 等）。
+Ignoring：不接收任何通知。
+
+
+3.通过 GitHub Actions 触发自定义邮件通知
+在 .github/workflows/ 目录下编辑你的 YAML 文件（如 dnshe-renew.yml）。
+使用 actions/setup-python 和 python 脚本发送邮件，或集成第三方邮件服务（如 SendGrid、Mailgun）。
+或者使用 GitHub Actions 的 mail 动作。
+
 
 ##  运行计划
 
