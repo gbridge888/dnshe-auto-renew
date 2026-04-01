@@ -29,8 +29,8 @@ jobs:
       # 4. 运行续期脚本
       - name: 🚀 执行 DNSHE 续期
         env:
-          DNSHE_API_KEY: ${{ secrets.DNSHE_API_KEY }}
-          DNSHE_API_SECRET: ${{ secrets.DNSHE_API_SECRET }}
+          DNSHE_API_KEY: ${{ secrets.DNSHE_API_KEY2 }}
+          DNSHE_API_SECRET: ${{ secrets.DNSHE_API_SECRET2 }}
         run: python renew.py
 
       # 最后一步：生成摘要（会出现在通知邮件中）
